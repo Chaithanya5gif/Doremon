@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 25% 6%; /* #0B0F13 */
+    --foreground: 210 20% 90%;
+    --radius: 0;
+  }
+
+  * {
+    @apply border-system-gray/20;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  *::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  body {
+    @apply bg-system-bg text-system-text font-mono;
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(0, 229, 255, 0.03) 0%, transparent 50%),
+      linear-gradient(rgba(0, 229, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 229, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .system-panel {
+    @apply border border-system-cyan/30 bg-system-panel/80 backdrop-blur-sm relative;
+  }
+  
+  /* Cyberpunk corner accents */
+  .system-panel::before {
+    content: '';
+    @apply absolute -top-[1px] -left-[1px] w-2 h-2 border-t border-l border-system-cyan;
+  }
+  .system-panel::after {
+    content: '';
+    @apply absolute -bottom-[1px] -right-[1px] w-2 h-2 border-b border-r border-system-cyan;
+  }
+
+  .system-input {
+    @apply bg-transparent border border-system-gray/30 px-3 py-2 text-sm text-system-text focus:outline-none focus:border-system-cyan/60 transition-colors w-full font-mono placeholder:text-system-gray/50;
+  }
+
+  .system-button {
+    @apply bg-transparent border border-system-cyan/50 text-system-cyan px-4 py-2 text-sm uppercase tracking-widest hover:bg-system-cyan/10 hover:border-system-cyan transition-all font-mono active:scale-[0.98];
+  }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 0.1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
